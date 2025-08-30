@@ -1,19 +1,18 @@
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: coffee_shop_app
+    restart: unless-stopped
     ports:
-      - "3000:3000" 
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules 
+      - 3000:3000
     depends_on:
       - db
       - redis
       - rabbitmq
     env_file:
       - .env
-    command: npm run start:dev
 
   db:
     image: postgres:15
@@ -25,7 +24,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data 
+      - pgdata:/var/lib/postgresql/data
 
   redis:
     image: redis:7
@@ -39,7 +38,7 @@ services:
     image: rabbitmq:3-management
     container_name: coffee_shop_rabbitmq
     ports:
-      - "5672:5672" 
+      - "5672:5672"
       - "15672:15672"
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
