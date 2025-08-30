@@ -1,3 +1,17 @@
-GET http://localhost:3000
+# SESSION
+
+POST http://localhost:3000/sessions/check-in
+content-type: application/json
+
+{
+    "customerId": "b1eebc99-9c0b-4ef8-bb6d-6bb9bd380b22"
+}
 
 ####
+
+POST http://localhost:3000/sessions/check-out
+content-type: application/json
+
+{
+    "customerId": "b1eebc99-9c0b-4ef8-bb6d-6bb9bd380b22"
+}
